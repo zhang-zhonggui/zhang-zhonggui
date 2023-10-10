@@ -163,17 +163,17 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/redis/" style="color: #00a596">redis</a>
+                <a href="/zhang-zhonggui/tags/redis/" style="color: #ffa2c4">redis</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #ff7d73">spring boot</a>
+                <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #03a9f4">spring boot</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/mybatis/" style="color: #ff7d73">mybatis</a>
+                <a href="/zhang-zhonggui/tags/mybatis/" style="color: #ffa2c4">mybatis</a>
             </span>
             
         </span>
@@ -181,26 +181,45 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="redis做mybatis的缓存"><a href="#redis做mybatis的缓存" class="headerlink" title="redis做mybatis的缓存"></a>redis做mybatis的缓存</h1><span id="more"></span>
+        <h2 id="redis做mybatis的缓存"><a href="#redis做mybatis的缓存" class="headerlink" title="redis做mybatis的缓存"></a>redis做mybatis的缓存</h2><span id="more"></span>
 
-<p>项目版本</p>
-<p>​				 springboot：3.1.2  </p>
-<p>​				数据库：pgsql：15.3-alpine</p>
-<p>​				redis： 7.0.14</p>
-<h2 id="1-导入相关jar包"><a href="#1-导入相关jar包" class="headerlink" title="1.导入相关jar包"></a>1.导入相关jar包</h2><pre><code class="xml">    &lt;dependencies&gt;
+<p>项目版本： springboot：3.1.4 、数据库：MySQL 8.0.27、redis： 7.0.14、jkd17</p>
+<h3 id="1-导入相关jar包"><a href="#1-导入相关jar包" class="headerlink" title="1.导入相关jar包"></a>1.导入相关jar包</h3><pre><code class="xml">        &lt;dependency&gt;
+            &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
+            &lt;artifactId&gt;gson&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.yaml&lt;/groupId&gt;
+            &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
+            &lt;version&gt;2.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;cn.hutool&lt;/groupId&gt;
+            &lt;artifactId&gt;hutool-all&lt;/artifactId&gt;
+            &lt;version&gt;5.8.21&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+            &lt;version&gt;3.13.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 使用 Redis 作为缓存实现，需要添加此 starter --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+        &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
             &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;!--引入新版本去除漏洞--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.yaml&lt;/groupId&gt;
-            &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
-            &lt;version&gt;2.1&lt;/version&gt;
+            &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+            &lt;artifactId&gt;guava&lt;/artifactId&gt;
+            &lt;version&gt;32.1.2-jre&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
@@ -213,19 +232,9 @@
             &lt;version&gt;4.3.0&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
-            &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
-            &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+            &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
             &lt;scope&gt;runtime&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.alibaba.fastjson2&lt;/groupId&gt;
-            &lt;artifactId&gt;fastjson2&lt;/artifactId&gt;
-            &lt;version&gt;2.0.38&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;cn.hutool&lt;/groupId&gt;
-            &lt;artifactId&gt;hutool-all&lt;/artifactId&gt;
-            &lt;version&gt;5.8.20&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
@@ -237,39 +246,49 @@
             &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
             &lt;scope&gt;test&lt;/scope&gt;
         &lt;/dependency&gt;
-    &lt;/dependencies&gt;
 </code></pre>
-<h2 id="2-设置配置文件"><a href="#2-设置配置文件" class="headerlink" title="2.设置配置文件"></a>2.设置配置文件</h2><pre><code class="yaml">server:
-  port: 8080
-
-spring:
+<h3 id="2-设置配置文件"><a href="#2-设置配置文件" class="headerlink" title="2.设置配置文件"></a>2.设置配置文件</h3><pre><code class="yaml">spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
-    url: jdbc:postgresql://192.168.2.38:5432/test
+    # 数据库连接地址
+    url: jdbc:127.0.0.1:3306/cache?useUnicode=true
+    # 数据库用户名
     username: root
+    # 数据库密码
     password: 123456
-    driver-class-name: org.postgresql.Driver
+    # 数据库驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据源类型
+    type: com.zaxxer.hikari.HikariDataSource
   data:
+    # redis连接地址
     redis:
-      host: 192.168.2.38
-      password: 123456
-      database: 0
-      port: 6379
+      host: 127.0.0.1
+      port: 11524
       lettuce:
         pool:
           max-active: 8
-          max-wait: -1ms
           max-idle: 8
-          min-idle: 0
+          max-wait: -1
+  cache:
+    #缓存类型
+    type: redis
+    # redis缓存配置
+    redis:
+      # 缓存key前缀
+      key-prefix: cache-
+      #      # 是否缓存空值
+      #      cache-null-values: true
+      #过期时间15分钟
+      time-to-live: 900s
 mybatis-plus:
-# 配置实体类
-  type-aliases-package: com.example.demo.entity
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 开启缓存
-    cache-enabled: true
+  type-aliases-package: com.example.cache.domain
   mapper-locations: classpath:mapper/*.xml
-
-
+  configuration:
+    cache-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
@@ -281,121 +300,49 @@ springdoc:
   group-configs:
     - group: &#39;default&#39;
       paths-to-match: &#39;/**&#39;
-      packages-to-scan: com.example.mybatisrediscache.controller
+      packages-to-scan: com.example.cache.controller
 # knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true
   setting:
     language: zh_cn
 </code></pre>
-<h2 id="3-书写测试接口"><a href="#3-书写测试接口" class="headerlink" title="3.书写测试接口"></a>3.书写测试接口</h2><pre><code class="java">@RestController
-@RequestMapping(&quot;test&quot;)
-@Tag(name = &quot;test&quot;, description = &quot;测试接口&quot;)
-public class TestController &#123;
-    @GetMapping
-    @Schema(description = &quot;测试方法&quot;)
-    public String test() &#123;
-        return &quot;hello world&quot;;
-    &#125;
+<h3 id="3-Mapper查询"><a href="#3-Mapper查询" class="headerlink" title="3.Mapper查询"></a>3.Mapper查询</h3><pre><code class="java">@Mapper
+public interface UserMapper extends BaseMapper&lt;User&gt; &#123;
+
+    List&lt;User&gt; list();
 &#125;
 </code></pre>
-<h2 id="4-书写一个正常的一个查询接口"><a href="#4-书写一个正常的一个查询接口" class="headerlink" title="4.书写一个正常的一个查询接口"></a>4.书写一个正常的一个查询接口</h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;com.example.mybatisrediscache.mapper.UserMapper&quot;&gt;
-  &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.example.mybatisrediscache.domain.User&quot;&gt;
-    &lt;!--@mbg.generated--&gt;
-    &lt;!--@Table &quot;user&quot;--&gt;
-    &lt;id column=&quot;id&quot; jdbcType=&quot;INTEGER&quot; property=&quot;id&quot; /&gt;
-    &lt;result column=&quot;name&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;name&quot; /&gt;
-    &lt;result column=&quot;age&quot; jdbcType=&quot;INTEGER&quot; property=&quot;age&quot; /&gt;
-    &lt;result column=&quot;address&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;address&quot; /&gt;
-  &lt;/resultMap&gt;
-  &lt;sql id=&quot;Base_Column_List&quot;&gt;
-    &lt;!--@mbg.generated--&gt;
-    id, &quot;name&quot;, age, address
-  &lt;/sql&gt;
-
-  &lt;select id=&quot;selectAllUser&quot; resultMap=&quot;BaseResultMap&quot;&gt;
-      select id, &quot;name&quot;, age, address from &quot;user&quot;
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre>
-<pre><code class="java">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;
-    List&lt;User&gt; selectAllUser();
-&#125;
-</code></pre>
-<pre><code class="java">@Service
-public class CacheServiceImpl implements CacheService &#123;
-
-    @Resource
-    private UserMapper userMapper;
-
-    @Override
-    public List&lt;User&gt; selectAllUser() &#123;
-        return userMapper.selectAllUser();
-    &#125;
-&#125;
-</code></pre>
-<h2 id="5-Redis使用FastJson序列化"><a href="#5-Redis使用FastJson序列化" class="headerlink" title="5.Redis使用FastJson序列化"></a>5.Redis使用FastJson序列化</h2><pre><code class="java">
-@Configuration
-public class RedisConfig &#123;
+<h3 id="4-Redis使用json序列化RedisTemplate"><a href="#4-Redis使用json序列化RedisTemplate" class="headerlink" title="4.Redis使用json序列化RedisTemplate"></a>4.Redis使用json序列化RedisTemplate</h3><pre><code class="java">   /**
+     * redis序列化
+     */
     @Bean(name = &quot;RedisTemplate&quot;)
-    @SuppressWarnings(value = &#123;&quot;unchecked&quot;, &quot;rawtypes&quot;&#125;)
-    public RedisTemplate&lt;Object, Object&gt; redisTemplate(RedisConnectionFactory connectionFactory) &#123;
-        RedisTemplate&lt;Object, Object&gt; template = new RedisTemplate&lt;&gt;();
-        template.setConnectionFactory(connectionFactory);
-
-        FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
-
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(serializer);
-
-        // Hash的key也采用StringRedisSerializer的序列化方式
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(serializer);
-
-        template.afterPropertiesSet();
-        return template;
+    public RedisTemplate&lt;Object, Object&gt; redisTemplate(RedisConnectionFactory redisConnectionFactory) &#123;
+        RedisTemplate&lt;Object, Object&gt; redisTemplate = new RedisTemplate&lt;&gt;();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        //设置key的序列化方式
+        redisTemplate.setKeySerializer(RedisSerializer.string());
+        //设置value的序列化方式
+        redisTemplate.setValueSerializer(RedisSerializer.json());
+        //设置hash的key的序列化方式
+        redisTemplate.setHashKeySerializer(RedisSerializer.string());
+        //设置hash的value的序列化方式
+        redisTemplate.setHashValueSerializer(RedisSerializer.json());
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     &#125;
-
-&#125;
 </code></pre>
-<pre><code class="java">public class FastJson2JsonRedisSerializer&lt;T&gt; implements RedisSerializer&lt;T&gt; &#123;
-    public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
-
-    private Class&lt;T&gt; clazz;
-
-    public FastJson2JsonRedisSerializer(Class&lt;T&gt; clazz) &#123;
-        super();
-        this.clazz = clazz;
-    &#125;
-
-    @Override
-    public byte[] serialize(T t) throws SerializationException &#123;
-        if (t == null) &#123;
-            return new byte[0];
-        &#125;
-        return JSON.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
-    &#125;
-
-    @Override
-    public T deserialize(byte[] bytes) throws SerializationException &#123;
-        if (bytes == null || bytes.length &lt;= 0) &#123;
-            return null;
-        &#125;
-        String str = new String(bytes, DEFAULT_CHARSET);
-
-        return JSON.parseObject(str, clazz, JSONReader.Feature.SupportAutoType);
-    &#125;
-&#125;
-</code></pre>
-<h2 id="6-实现自定义cache"><a href="#6-实现自定义cache" class="headerlink" title="6.实现自定义cache"></a>6.实现自定义cache</h2><pre><code class="java">@Slf4j
+<h3 id="5-实现自定义cache"><a href="#5-实现自定义cache" class="headerlink" title="5.实现自定义cache"></a>5.实现自定义cache</h3><pre><code class="java">/**
+ * @author 25212
+ */
+@Slf4j
 public class MybatisRedisCache implements Cache &#123;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
 
-    private static final RedisTemplate&lt;String, Object&gt; REDISTEMPLATE = SpringUtil.getBean(&quot;RedisTemplate&quot;);
+
+    private final RedisTemplate&lt;String, Object&gt; redisTemplate = SpringUtil.getBean(&quot;RedisTemplate&quot;);
+
 
     private final String id;
 
@@ -417,7 +364,7 @@ public class MybatisRedisCache implements Cache &#123;
         if (value != null) &#123;
             log.debug(&quot;保存缓存&quot;);
             //保存数据并设置其过期时间为1天
-            REDISTEMPLATE.opsForValue().set(key.toString(), value, Duration.ofDays(1));
+            redisTemplate.opsForValue().set(key.toString(), value, Duration.ofDays(1));
         &#125;
     &#125;
 
@@ -425,7 +372,7 @@ public class MybatisRedisCache implements Cache &#123;
     public Object getObject(Object key) &#123;
         try &#123;
             if (key != null) &#123;
-                return REDISTEMPLATE.opsForValue().get(key.toString());
+                return redisTemplate.opsForValue().get(key.toString());
             &#125;
         &#125; catch (Exception e) &#123;
             log.error(&quot;缓存出错 &quot;);
@@ -437,7 +384,7 @@ public class MybatisRedisCache implements Cache &#123;
     public Object removeObject(Object key) &#123;
         if (key != null) &#123;
             log.debug(&quot;清除缓存&quot;);
-            REDISTEMPLATE.delete(key.toString());
+            redisTemplate.delete(key.toString());
         &#125;
         return null;
     &#125;
@@ -445,15 +392,15 @@ public class MybatisRedisCache implements Cache &#123;
     @Override
     public void clear() &#123;
         log.debug(&quot;清空缓存&quot;);
-        Set&lt;String&gt; keys = REDISTEMPLATE.keys(&quot;*:&quot; + this.id + &quot;*&quot;);
+        Set&lt;String&gt; keys = redisTemplate.keys(&quot;*:&quot; + this.id + &quot;*&quot;);
         if (!CollectionUtils.isEmpty(keys)) &#123;
-            REDISTEMPLATE.delete(keys);
+            redisTemplate.delete(keys);
         &#125;
     &#125;
 
     @Override
     public int getSize() &#123;
-        Long size = REDISTEMPLATE.execute(RedisServerCommands::dbSize);
+        Long size = redisTemplate.execute(RedisServerCommands::dbSize);
         return size != null ? size.intValue() : 0;
     &#125;
 
@@ -463,35 +410,18 @@ public class MybatisRedisCache implements Cache &#123;
     &#125;
 &#125;
 </code></pre>
-<h2 id="7-在mapper中开启二级缓存"><a href="#7-在mapper中开启二级缓存" class="headerlink" title="7.在mapper中开启二级缓存"></a>7.在mapper中开启二级缓存</h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;com.example.mybatisrediscache.mapper.UserMapper&quot;&gt;
-    &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.example.mybatisrediscache.domain.User&quot;&gt;
-        &lt;!--@mbg.generated--&gt;
-        &lt;!--@Table &quot;user&quot;--&gt;
-        &lt;id column=&quot;id&quot; jdbcType=&quot;INTEGER&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;name&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;name&quot;/&gt;
-        &lt;result column=&quot;age&quot; jdbcType=&quot;INTEGER&quot; property=&quot;age&quot;/&gt;
-        &lt;result column=&quot;address&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;address&quot;/&gt;
-    &lt;/resultMap&gt;
-    &lt;sql id=&quot;Base_Column_List&quot;&gt;
-        &lt;!--@mbg.generated--&gt;
-        id,
-        &quot;name&quot;,
-        age,
-        address
-    &lt;/sql&gt;
-    &lt;!--开启缓存并指定缓存类--&gt;
-    &lt;cache type=&quot;com.example.mybatisrediscache.cache.MybatisRedisCache&quot;/&gt;
+<h3 id="6-在mapper中开启二级缓存"><a href="#6-在mapper中开启二级缓存" class="headerlink" title="6.在mapper中开启二级缓存"></a>6.在mapper中开启二级缓存</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;
+&lt;mapper namespace=&quot;com.example.cache.mapper.UserMapper&quot;&gt;
+&lt;!--    指定自定义序列号方式--&gt;
+    &lt;cache type=&quot;com.example.cache.cache.MybatisRedisCache&quot;/&gt;
 
-
-    &lt;select id=&quot;selectAllUser&quot; resultMap=&quot;BaseResultMap&quot;&gt;
-        select id, &quot;name&quot;, age, address
-        from &quot;user&quot;
+    &lt;select id=&quot;list&quot; resultType=&quot;com.example.cache.domain.User&quot;&gt;
+        select  * from user
     &lt;/select&gt;
 &lt;/mapper&gt;
 </code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="demo地址-demo"><a href="#demo地址-demo" class="headerlink" title="demo地址 demo"></a>demo地址 <a target="_blank" rel="noopener" href="https://gitee.com/zhang-zhonggui/mybatis-redis-cache">demo</a></h2>
+
     </div>
     
     
