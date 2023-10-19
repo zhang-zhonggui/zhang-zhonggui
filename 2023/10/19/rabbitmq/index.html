@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>坑爹的免费云服务器 | 张中贵的博客</title>
+        <title>rabbitmq | 张中贵的博客</title>
         <meta name="author" content="zzg" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -145,14 +145,14 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>坑爹的免费云服务器</h1>
+        <h1>rabbitmq</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/4/22
+            2023/10/19
         </span>
         
         
@@ -163,7 +163,12 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="color: #00a596">云服务器</a>
+                <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #00bcd4">rabbitmq</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #03a9f4">Spring Boot</a>
             </span>
             
         </span>
@@ -171,10 +176,61 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="三丰云与阿贝云两个坑爹服务器"><a href="#三丰云与阿贝云两个坑爹服务器" class="headerlink" title="三丰云与阿贝云两个坑爹服务器"></a>三丰云与阿贝云两个坑爹服务器</h1><span id="more"></span>
+        <h1 id="spring-boot使用rabbitmq"><a href="#spring-boot使用rabbitmq" class="headerlink" title="spring boot使用rabbitmq"></a>spring boot使用rabbitmq</h1><span id="more"></span>
 
-<h4 id="1-起因"><a href="#1-起因" class="headerlink" title="1.起因"></a>1.起因</h4><p>今天学习kafka想用一个云服务器，发现了三丰云与阿贝云两个云服务器厂商，发现打出的信息是永久免费的，不过需要续期，然后感觉还行，就注册一个试了一下。</p>
-<h5 id="1-结果发现就是一个坑，需要实名认证，然后这个是收费的0-3元，给你一个充值限制，每次最低冲1元。呵呵！，"><a href="#1-结果发现就是一个坑，需要实名认证，然后这个是收费的0-3元，给你一个充值限制，每次最低冲1元。呵呵！，" class="headerlink" title="1.结果发现就是一个坑，需要实名认证，然后这个是收费的0.3元，给你一个充值限制，每次最低冲1元。呵呵！，"></a>1.结果发现就是一个坑，需要实名认证，然后这个是收费的0.3元，给你一个充值限制，每次最低冲1元。呵呵！，</h5><h5 id="2-第二坑只有1天时间就过期了。需要6小时后后续期"><a href="#2-第二坑只有1天时间就过期了。需要6小时后后续期" class="headerlink" title="2.第二坑只有1天时间就过期了。需要6小时后后续期"></a>2.第二坑只有1天时间就过期了。需要6小时后后续期</h5><h5 id="3-第三坑，后续续费需要用户为他发送博客，及宣传，切每次的续费时间只有5天，发送地方、内容、审核极为苛刻，再用他们我旧是狗，果然免费的才是最贵的。"><a href="#3-第三坑，后续续费需要用户为他发送博客，及宣传，切每次的续费时间只有5天，发送地方、内容、审核极为苛刻，再用他们我旧是狗，果然免费的才是最贵的。" class="headerlink" title="3.第三坑，后续续费需要用户为他发送博客，及宣传，切每次的续费时间只有5天，发送地方、内容、审核极为苛刻，再用他们我旧是狗，果然免费的才是最贵的。"></a>3.第三坑，后续续费需要用户为他发送博客，及宣传，切每次的续费时间只有5天，发送地方、内容、审核极为苛刻，再用他们我旧是狗，果然免费的才是最贵的。</h5>
+<h2 id="1、导包"><a href="#1、导包" class="headerlink" title="1、导包"></a>1、导包</h2><pre><code class="xml">      &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h2 id="2-、编写配置文件"><a href="#2-、编写配置文件" class="headerlink" title="2 、编写配置文件"></a>2 、编写配置文件</h2><pre><code class="java">spring:
+  rabbitmq:
+    port: 5672
+    username: ribzdefp
+    password: 3RSfYkVr102z7cJmkB2e-_pL-isCwOT4
+    addresses: amqps://ribzdefp:3RSfYkVr102z7cJmkB2e-_pL-isCwOT4@gerbil.rmq.cloudamqp.com/ribzdefp
+</code></pre>
+<h2 id="3、发送与接接受消息"><a href="#3、发送与接接受消息" class="headerlink" title="3、发送与接接受消息"></a>3、发送与接接受消息</h2><h4 id="3-1、发送hello-world-消息"><a href="#3-1、发送hello-world-消息" class="headerlink" title="3.1、发送hello world 消息"></a>3.1、发送hello world 消息</h4><h5 id="3-1-1、编写生产者"><a href="#3-1-1、编写生产者" class="headerlink" title="3.1.1、编写生产者"></a>3.1.1、编写生产者</h5><pre><code class="java">@RestController
+@RequestMapping(&quot;/hello&quot;)
+@Tag(name = &quot;发送hello word消息&quot;)
+public class HelloWord &#123;
+    public static final String SUCCESS = &quot;发送成功&quot;;
+    
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
+    @GetMapping(&quot;hello&quot;)
+    @Operation(description = &quot;发送hello word消息&quot;, summary = &quot;发送hello word消息&quot;)
+    public String send() &#123;
+        rabbitTemplate.convertAndSend(null, &quot;hello&quot;, &quot;zzg&quot;);
+        return SUCCESS;
+    &#125;
+&#125;
+</code></pre>
+<h5 id="3-1-2、编写消费者"><a href="#3-1-2、编写消费者" class="headerlink" title="3.1.2、编写消费者"></a>3.1.2、编写消费者</h5><pre><code class="java">@Configuration
+public class Rabbitmq &#123;
+
+    public static final String QUEUE_NAME = &quot;hello&quot;;
+
+    @Bean
+    public Queue queue() &#123;
+        return new Queue(QUEUE_NAME, false);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">@Service
+public class Hello &#123;
+    //该注解用于配置监听器监听队列“hello”
+    @RabbitListener(queues = &quot;hello&quot;)
+    /**
+     * 该方法用于将消息打印到控制台
+     */
+    public void msg(String msg) &#123;
+        System.out.println(msg);
+    &#125;
+&#125;
+</code></pre>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4>
     </div>
     
     
