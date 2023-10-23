@@ -163,7 +163,7 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/redis/" style="color: #03a9f4">redis</a>
+                <a href="/zhang-zhonggui/tags/redis/" style="color: #ff7d73">redis</a>
             </span>
             
         </span>
@@ -171,7 +171,7 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Redis的内存淘汰策略"><a href="#Redis的内存淘汰策略" class="headerlink" title="Redis的内存淘汰策略"></a>Redis的内存淘汰策略</h1><p><em><span id="more"></span></em></p>
+        <h1 id="Redis的内存淘汰策机制与过期策略"><a href="#Redis的内存淘汰策机制与过期策略" class="headerlink" title="Redis的内存淘汰策机制与过期策略"></a>Redis的内存淘汰策机制与过期策略</h1><p><em><span id="more"></span></em></p>
 <h2 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h2><h3 id="1-定期删除"><a href="#1-定期删除" class="headerlink" title="1.定期删除"></a>1.定期删除</h3><p>Redis 会将每个设置了过期时间的 key 放入到一个独立的字典中，以后会定期遍历这个字典来删除到期的 key。</p>
 <p>Redis 默认会每秒进行十次过期扫描（100ms一次），过期扫描不会遍历过期字典中所有的 key，而是采用了一种简单的贪心策略。</p>
 <p>1.从过期字典中随机 20 个 key；</p>
@@ -193,7 +193,6 @@
 <li>allkeys-lfu：从所有键中驱逐使用频率最少的键</li>
 </ol>
 <p>一版使用最近最少原则，在所以设置过期时间的key中找到最近最少使用的key进行删除。</p>
-<!-- more -->
 
     </div>
     

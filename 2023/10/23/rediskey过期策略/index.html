@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>Tags: 学习 | 张中贵的博客</title>
+        <title>rediskey过期策略 | 张中贵的博客</title>
         <meta name="author" content="zzg" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -27,6 +27,10 @@
 
 
 <script src="/zhang-zhonggui/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -139,215 +143,30 @@
 
             <transition name="into">
             <div id="main" v-show="!loading">
-                <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/spring/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                spring
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/centos/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                centos
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/jdk/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                jdk
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/MySQL/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                MySQL
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/Spring-Cloud/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Spring Cloud
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/navicat%E6%BF%80%E6%B4%BB/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                navicat激活
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/rabbitmq/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                rabbitmq
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Spring Boot
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/redis/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                redis
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/mybatis/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                mybatis
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/spring-cloud/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                spring-cloud
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                云服务器
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/%E5%AD%A6%E4%B9%A0/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/work/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                work
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/spring-boot/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                spring boot
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/zhang-zhonggui/tags/%E9%9D%A2%E8%AF%95/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                面试
-            </a>
+                <div class="article">
+    <div>
+        <h1>rediskey过期策略</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/23
         </span>
         
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/4/6</div>
-            <a href="/zhang-zhonggui/2023/04/06/%E5%AD%A6%E4%B9%A0/">
-                <h3>学习</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/zhang-zhonggui/tags/%E5%AD%A6%E4%B9%A0/" style="color: #ff7d73">学习</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -380,6 +199,12 @@
             
         </div>
         <script src="/zhang-zhonggui/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>
