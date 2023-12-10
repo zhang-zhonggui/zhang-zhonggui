@@ -166,6 +166,92 @@
         
 
 <div class="post">
+    <a href="/zhang-zhonggui/2023/12/10/beanToMap/">
+        <h2 class="post-title">beanToMap</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/12/10
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <span id="more"></span>
+
+<p>对象转map</p>
+<h1 id="1-使用hutool工具类"><a href="#1-使用hutool工具类" class="headerlink" title="1.使用hutool工具类"></a>1.使用hutool工具类</h1><pre><code class="xml"> &lt;dependency&gt;
+            &lt;groupId&gt;cn.hutool&lt;/groupId&gt;
+            &lt;artifactId&gt;hutool-all&lt;/artifactId&gt;
+            &lt;version&gt;5.8.23&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>2.使用对象beantomap</p>
+<pre><code class="java"> */
+public class BeanToMap &#123;
+
+
+    public static void main(String[] args) &#123;
+        User user = new User();
+        user.setName(&quot;张三&quot;);
+        user.setAddress(&quot;北京&quot;);
+        Map&lt;String, Object&gt; map = BeanUtil.beanToMap(user);
+        //bean转map
+        System.out.println(map);
+        // //获取对象的所有key
+        String string = map.values().toString();
+        System.out.println(string);
+        //获取对象的所有value
+        String key = map.keySet().toString();
+        System.out.println(key);
+    &#125;
+&#125;
+@Data
+class User &#123;
+
+    public String name;
+
+
+    public String address;
+
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/zhang-zhonggui/tags/spring/" style="color: #03a9f4">
+                spring
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/zhang-zhonggui/tags/hutool/" style="color: #03a9f4">
+                hutool
+            </a>
+        </span>
+        
+    </div>
+    <a href="/zhang-zhonggui/2023/12/10/beanToMap/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/zhang-zhonggui/2023/10/19/rabbitmq/">
         <h2 class="post-title">rabbitmq</h2>
     </a>
@@ -196,14 +282,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #03a9f4">
+            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ffa2c4">
                 rabbitmq
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #00a596">
                 Spring Boot
             </a>
         </span>
@@ -243,14 +329,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/centos/" style="color: #00a596">
+            <a href="/zhang-zhonggui/tags/centos/" style="color: #ffa2c4">
                 centos
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/jdk/" style="color: #03a9f4">
+            <a href="/zhang-zhonggui/tags/jdk/" style="color: #ffa2c4">
                 jdk
             </a>
         </span>
@@ -304,7 +390,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #00bcd4">
                 mybatis
             </a>
         </span>
@@ -344,7 +430,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #ff7d73">
                 spring boot
             </a>
         </span>
@@ -384,7 +470,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/work/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/work/" style="color: #00a596">
                 work
             </a>
         </span>
@@ -424,7 +510,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/MySQL/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/MySQL/" style="color: #03a9f4">
                 MySQL
             </a>
         </span>
@@ -464,7 +550,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Cloud/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/Spring-Cloud/" style="color: #00a596">
                 Spring Cloud
             </a>
         </span>
@@ -504,7 +590,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/navicat%E6%BF%80%E6%B4%BB/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/navicat%E6%BF%80%E6%B4%BB/" style="color: #ff7d73">
                 navicat激活
             </a>
         </span>
@@ -544,62 +630,13 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="color: #00a596">
+            <a href="/zhang-zhonggui/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="color: #ffa2c4">
                 云服务器
             </a>
         </span>
         
     </div>
     <a href="/zhang-zhonggui/2023/04/22/%E5%9D%91%E7%88%B9%E7%9A%84%E5%85%8D%E8%B4%B9%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/04/20/%E4%BD%BF%E7%94%A8nacos%E5%87%BA%E7%8E%B0%E7%9A%84bug/">
-        <h2 class="post-title">使用nacos出现的bug</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/zhang-zhonggui/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/20
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="nacos使用出现的问题"><a href="#nacos使用出现的问题" class="headerlink" title="nacos使用出现的问题"></a>nacos使用出现的问题</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/spring-cloud/" style="color: #ffa2c4">
-                spring-cloud
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/04/20/%E4%BD%BF%E7%94%A8nacos%E5%87%BA%E7%8E%B0%E7%9A%84bug/" class="go-post">阅读全文</a>
 </div>
 
 
