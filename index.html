@@ -166,6 +166,100 @@
         
 
 <div class="post">
+    <a href="/zhang-zhonggui/2024/04/05/springboot%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+        <h2 class="post-title">springboot线程池</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Spring Boot线程池配置使用</p>
+<h4 id="1-在yaml中配置"><a href="#1-在yaml中配置" class="headerlink" title="1.在yaml中配置"></a>1.在yaml中配置</h4><pre><code class="java">spring:
+  task:
+    execution:
+      pool:
+        # 核心线程数
+        core-size: 8
+        # 最大线程数
+        max-size: 20
+        # 线程空闲时间
+        queue-capacity: 2000
+        # 线程名
+      thread-name-prefix: cache
+</code></pre>
+<h5 id="2-1在Spring-Boot中使用"><a href="#2-1在Spring-Boot中使用" class="headerlink" title="2.1在Spring Boot中使用"></a>2.1在Spring Boot中使用</h5><pre><code class="java">    public void redisTest() &#123;
+        threadPoolTaskExecutor.execute(() -&gt; &#123;
+                    log.info(&quot;&#123;&#125;线程执行&quot;, Thread.currentThread().getName());
+                &#125;
+        );
+        log.info(&quot;任务执行&quot;);
+    &#125;
+</code></pre>
+<h5 id="3-执行结果"><a href="#3-执行结果" class="headerlink" title="3.执行结果"></a>3.执行结果</h5><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405143112537.png" alt="image-20240405143112537"></p>
+<h4 id="2-使用注解使用"><a href="#2-使用注解使用" class="headerlink" title="2.使用注解使用"></a>2.使用注解使用</h4><h5 id="2-1启动类注解添加-EnableAsync"><a href="#2-1启动类注解添加-EnableAsync" class="headerlink" title="2.1启动类注解添加@EnableAsync"></a>2.1启动类注解添加@EnableAsync</h5><pre><code class="java">@SpringBootApplication
+@EnableCaching
+@MapperScan(&quot;com.example.cache.mapper&quot;)
+@EnableAsync
+public class CacheApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication application = new SpringApplication(CacheApplication.class);
+        application.setApplicationStartup(new BufferingApplicationStartup(2048));
+        application.run(args);
+    &#125;
+&#125;
+</code></pre>
+<h5 id="2-2在方法中添加注解-Async"><a href="#2-2在方法中添加注解-Async" class="headerlink" title="2.2在方法中添加注解 @Async"></a>2.2在方法中添加注解 @Async</h5><pre><code class="java">    @Async
+    public void poolTest() &#123;
+        try &#123;
+            Thread.sleep(1000);
+        &#125; catch (InterruptedException e) &#123;
+            throw new RuntimeException(e);
+        &#125;
+        log.info(&quot;异步执行&quot;);
+    &#125;
+</code></pre>
+<h5 id="2-3方法调用"><a href="#2-3方法调用" class="headerlink" title="2.3方法调用"></a>2.3方法调用</h5><pre><code class="java">
+    @Resource
+    private TestServiceImpl  testService;
+    public void ThreadPoolTest() &#123;
+        testService.poolTest();
+        log.info(&quot;任务执行&quot;);
+    &#125;
+</code></pre>
+<h6 id="2-4执行结果"><a href="#2-4执行结果" class="headerlink" title="2.4执行结果"></a>2.4执行结果</h6><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405143900919.png" alt="image-20240405143900919"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #00bcd4">
+                Spring Boot
+            </a>
+        </span>
+        
+    </div>
+    <a href="/zhang-zhonggui/2024/04/05/springboot%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/zhang-zhonggui/2024/03/26/java%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/">
         <h2 class="post-title">java方法的调用</h2>
     </a>
@@ -196,7 +290,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/java/" style="color: #03a9f4">
+            <a href="/zhang-zhonggui/tags/java/" style="color: #00a596">
                 java
             </a>
         </span>
@@ -236,14 +330,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/spring/" style="color: #00a596">
+            <a href="/zhang-zhonggui/tags/spring/" style="color: #03a9f4">
                 spring
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/hutool/" style="color: #ff7d73">
+            <a href="/zhang-zhonggui/tags/hutool/" style="color: #00bcd4">
                 hutool
             </a>
         </span>
@@ -283,14 +377,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ff7d73">
+            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ffa2c4">
                 rabbitmq
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #03a9f4">
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ffa2c4">
                 Spring Boot
             </a>
         </span>
@@ -330,14 +424,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/centos/" style="color: #ff7d73">
+            <a href="/zhang-zhonggui/tags/centos/" style="color: #03a9f4">
                 centos
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/jdk/" style="color: #ff7d73">
+            <a href="/zhang-zhonggui/tags/jdk/" style="color: #00a596">
                 jdk
             </a>
         </span>
@@ -384,14 +478,14 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/redis/" style="color: #00a596">
+            <a href="/zhang-zhonggui/tags/redis/" style="color: #ff7d73">
                 redis
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #00a596">
                 mybatis
             </a>
         </span>
@@ -431,7 +525,7 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #03a9f4">
+            <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #00a596">
                 spring boot
             </a>
         </span>
@@ -481,6 +575,50 @@
 </div>
 
 <div class="post">
+    <a href="/zhang-zhonggui/2023/05/29/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/">
+        <h2 class="post-title">工作bug</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/29
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="让bing对自己的网站进行收录"><a href="#让bing对自己的网站进行收录" class="headerlink" title="让bing对自己的网站进行收录"></a>让bing对自己的网站进行收录</h1><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201619443.png" alt="image-20240404201619443"></p>
+<h3 id="1-打开微软官方地址经行注册https-www-bing-com-webmasters-about"><a href="#1-打开微软官方地址经行注册https-www-bing-com-webmasters-about" class="headerlink" title="1.打开微软官方地址经行注册https://www.bing.com/webmasters/about"></a>1.打开微软官方地址经行注册<a target="_blank" rel="noopener" href="https://www.bing.com/webmasters/about">https://www.bing.com/webmasters/about</a></h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201830396.png" alt="image-20240404201830396"></p>
+<h3 id="2-网站添加"><a href="#2-网站添加" class="headerlink" title="2.网站添加"></a>2.网站添加</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404202257409.png" alt="image-20240404202257409"></p>
+<h3 id="3-网站添加后即完成"><a href="#3-网站添加后即完成" class="headerlink" title="3.网站添加后即完成"></a>3.网站添加后即完成</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404203317589.png" alt="image-20240404203317589"></p>
+<h3 id="4-最后等待时间被bing收录"><a href="#4-最后等待时间被bing收录" class="headerlink" title="4.最后等待时间被bing收录"></a>4.最后等待时间被bing收录</h3>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/zhang-zhonggui/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">
+                博客
+            </a>
+        </span>
+        
+    </div>
+    <a href="/zhang-zhonggui/2023/05/29/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/zhang-zhonggui/2023/05/09/mybatis%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5/">
         <h2 class="post-title">mybatis批量插入</h2>
     </a>
@@ -511,93 +649,13 @@
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/MySQL/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/MySQL/" style="color: #03a9f4">
                 MySQL
             </a>
         </span>
         
     </div>
     <a href="/zhang-zhonggui/2023/05/09/mybatis%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/05/06/nacos%E5%88%B6%E4%BD%9C%E5%BC%80%E5%85%B3/">
-        <h2 class="post-title">nacos制作开关</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/6
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="nacos制作开关"><a href="#nacos制作开关" class="headerlink" title="nacos制作开关"></a>nacos制作开关</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/Spring-Cloud/" style="color: #03a9f4">
-                Spring Cloud
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/05/06/nacos%E5%88%B6%E4%BD%9C%E5%BC%80%E5%85%B3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/05/04/navicat%E6%BF%80%E6%B4%BB/">
-        <h2 class="post-title">navicat激活</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/4
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Navicat激活"><a href="#Navicat激活" class="headerlink" title="Navicat激活"></a>Navicat激活</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/navicat%E6%BF%80%E6%B4%BB/" style="color: #00a596">
-                navicat激活
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/05/04/navicat%E6%BF%80%E6%B4%BB/" class="go-post">阅读全文</a>
 </div>
 
 

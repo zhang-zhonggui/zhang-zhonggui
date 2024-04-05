@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>rabbitmq | 张中贵的博客</title>
+        <title>工作bug | 张中贵的博客</title>
         <meta name="author" content="zzg" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -145,14 +145,14 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>rabbitmq</h1>
+        <h1>工作bug</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/10/19
+            2023/5/29
         </span>
         
         
@@ -163,12 +163,7 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ff7d73">rabbitmq</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ff7d73">Spring Boot</a>
+                <a href="/zhang-zhonggui/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
             </span>
             
         </span>
@@ -176,61 +171,11 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="spring-boot使用rabbitmq"><a href="#spring-boot使用rabbitmq" class="headerlink" title="spring boot使用rabbitmq"></a>spring boot使用rabbitmq</h1><span id="more"></span>
-
-<h2 id="1、导包"><a href="#1、导包" class="headerlink" title="1、导包"></a>1、导包</h2><pre><code class="xml">      &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-</code></pre>
-<h2 id="2-、编写配置文件"><a href="#2-、编写配置文件" class="headerlink" title="2 、编写配置文件"></a>2 、编写配置文件</h2><pre><code class="java">spring:
-  rabbitmq:
-    port: 5672
-    username: ribzdefp
-    password: 3RSfYkVr102z7cJmkB2e-_pL-isCwOT4
-    addresses: amqps://ribzdefp:3RSfYkVr102z7cJmkB2e-_pL-isCwOT4@gerbil.rmq.cloudamqp.com/ribzdefp
-</code></pre>
-<h2 id="3、发送与接接受消息"><a href="#3、发送与接接受消息" class="headerlink" title="3、发送与接接受消息"></a>3、发送与接接受消息</h2><h4 id="3-1、发送hello-world-消息"><a href="#3-1、发送hello-world-消息" class="headerlink" title="3.1、发送hello world 消息"></a>3.1、发送hello world 消息</h4><h5 id="3-1-1、编写生产者"><a href="#3-1-1、编写生产者" class="headerlink" title="3.1.1、编写生产者"></a>3.1.1、编写生产者</h5><pre><code class="java">@RestController
-@RequestMapping(&quot;/hello&quot;)
-@Tag(name = &quot;发送hello word消息&quot;)
-public class HelloWord &#123;
-    public static final String SUCCESS = &quot;发送成功&quot;;
-    
-    @Resource
-    private RabbitTemplate rabbitTemplate;
-
-    @GetMapping(&quot;hello&quot;)
-    @Operation(description = &quot;发送hello word消息&quot;, summary = &quot;发送hello word消息&quot;)
-    public String send() &#123;
-        rabbitTemplate.convertAndSend(null, &quot;hello&quot;, &quot;zzg&quot;);
-        return SUCCESS;
-    &#125;
-&#125;
-</code></pre>
-<h5 id="3-1-2、编写消费者"><a href="#3-1-2、编写消费者" class="headerlink" title="3.1.2、编写消费者"></a>3.1.2、编写消费者</h5><pre><code class="java">@Configuration
-public class Rabbitmq &#123;
-
-    public static final String QUEUE_NAME = &quot;hello&quot;;
-
-    @Bean
-    public Queue queue() &#123;
-        return new Queue(QUEUE_NAME, false);
-    &#125;
-&#125;
-</code></pre>
-<pre><code class="java">@Service
-public class Hello &#123;
-    //该注解用于配置监听器监听队列“hello”
-    @RabbitListener(queues = &quot;hello&quot;)
-    /**
-     * 该方法用于将消息打印到控制台
-     */
-    public void msg(String msg) &#123;
-        System.out.println(msg);
-    &#125;
-&#125;
-</code></pre>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4>
+        <h1 id="让bing对自己的网站进行收录"><a href="#让bing对自己的网站进行收录" class="headerlink" title="让bing对自己的网站进行收录"></a>让bing对自己的网站进行收录</h1><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201619443.png" alt="image-20240404201619443"></p>
+<h3 id="1-打开微软官方地址经行注册https-www-bing-com-webmasters-about"><a href="#1-打开微软官方地址经行注册https-www-bing-com-webmasters-about" class="headerlink" title="1.打开微软官方地址经行注册https://www.bing.com/webmasters/about"></a>1.打开微软官方地址经行注册<a target="_blank" rel="noopener" href="https://www.bing.com/webmasters/about">https://www.bing.com/webmasters/about</a></h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201830396.png" alt="image-20240404201830396"></p>
+<h3 id="2-网站添加"><a href="#2-网站添加" class="headerlink" title="2.网站添加"></a>2.网站添加</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404202257409.png" alt="image-20240404202257409"></p>
+<h3 id="3-网站添加后即完成"><a href="#3-网站添加后即完成" class="headerlink" title="3.网站添加后即完成"></a>3.网站添加后即完成</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404203317589.png" alt="image-20240404203317589"></p>
+<h3 id="4-最后等待时间被bing收录"><a href="#4-最后等待时间被bing收录" class="headerlink" title="4.最后等待时间被bing收录"></a>4.最后等待时间被bing收录</h3>
     </div>
     
     

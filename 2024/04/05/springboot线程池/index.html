@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>学习 | 张中贵的博客</title>
+        <title>springboot线程池 | 张中贵的博客</title>
         <meta name="author" content="zzg" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -145,14 +145,14 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>学习</h1>
+        <h1>springboot线程池</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/4/6
+            2024/4/5
         </span>
         
         
@@ -163,7 +163,7 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/%E5%AD%A6%E4%B9%A0/" style="color: #03a9f4">学习</a>
+                <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #03a9f4">Spring Boot</a>
             </span>
             
         </span>
@@ -171,83 +171,61 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="java学习"><a href="#java学习" class="headerlink" title="java学习"></a>java学习</h1><span id="more"></span>
-
-<h2 id="1-java"><a href="#1-java" class="headerlink" title="1.java"></a>1.java</h2><h5 id="1-字符串判空"><a href="#1-字符串判空" class="headerlink" title="1.字符串判空"></a>1.字符串判空</h5><ol>
-<li>使用isEmpty判空底层使用的是</li>
-</ol>
-<pre><code class="java">public static boolean isEmpty(CharSequence cs) &#123;
-        return cs == null || cs.length() == 0;
+        <p>Spring Boot线程池配置使用</p>
+<h4 id="1-在yaml中配置"><a href="#1-在yaml中配置" class="headerlink" title="1.在yaml中配置"></a>1.在yaml中配置</h4><pre><code class="java">spring:
+  task:
+    execution:
+      pool:
+        # 核心线程数
+        core-size: 8
+        # 最大线程数
+        max-size: 20
+        # 线程空闲时间
+        queue-capacity: 2000
+        # 线程名
+      thread-name-prefix: cache
+</code></pre>
+<h5 id="2-1在Spring-Boot中使用"><a href="#2-1在Spring-Boot中使用" class="headerlink" title="2.1在Spring Boot中使用"></a>2.1在Spring Boot中使用</h5><pre><code class="java">    public void redisTest() &#123;
+        threadPoolTaskExecutor.execute(() -&gt; &#123;
+                    log.info(&quot;&#123;&#125;线程执行&quot;, Thread.currentThread().getName());
+                &#125;
+        );
+        log.info(&quot;任务执行&quot;);
     &#125;
 </code></pre>
-<p>2.使用isBlank判空地产是：</p>
-<pre><code class="java">public static boolean isBlank(CharSequence cs) &#123;
-    int strLen = length(cs);
-    if (strLen == 0) &#123;
-        return true;
-    &#125; else &#123;
-        for(int i = 0; i &lt; strLen; ++i) &#123;
-            if (!Character.isWhitespace(cs.charAt(i))) &#123;
-                return false;
-            &#125;
-        &#125;
-        return true;
-    &#125;
-&#125;
-</code></pre>
-<p>总结：它们的区别主要是字符串中是否区别有null、转义符等类型的字符串</p>
-<pre><code class="java">    String s = &quot;   &quot;;
-    boolean a = StringUtils.isEmpty(s);
-    boolean b = StringUtils.isBlank(s);
-    System.out.println(a); //false
-    System.out.println(b);//true
-</code></pre>
-<h5 id="2-String-与String"><a href="#2-String-与String" class="headerlink" title="2.String 与String"></a>2.String 与String</h5><h5 id="3-hashmap的合并"><a href="#3-hashmap的合并" class="headerlink" title="3.hashmap的合并"></a>3.hashmap的合并</h5><ul>
-<li><p>合并两个hashmap，如果两个map中key有相同的key那么被合并的key会覆盖到之前的key上面</p>
-<pre><code class="java">public class HashMapDemo &#123;
+<h5 id="3-执行结果"><a href="#3-执行结果" class="headerlink" title="3.执行结果"></a>3.执行结果</h5><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405143112537.png" alt="image-20240405143112537"></p>
+<h4 id="2-使用注解使用"><a href="#2-使用注解使用" class="headerlink" title="2.使用注解使用"></a>2.使用注解使用</h4><h5 id="2-1启动类注解添加-EnableAsync"><a href="#2-1启动类注解添加-EnableAsync" class="headerlink" title="2.1启动类注解添加@EnableAsync"></a>2.1启动类注解添加@EnableAsync</h5><pre><code class="java">@SpringBootApplication
+@EnableCaching
+@MapperScan(&quot;com.example.cache.mapper&quot;)
+@EnableAsync
+public class CacheApplication &#123;
     public static void main(String[] args) &#123;
-        HashMap&lt;Object, Object&gt; map = new HashMap&lt;&gt;();
-        map.put(&quot;name&quot;,&quot;张三&quot;);
-        HashMap&lt;Object, Object&gt; map1 = new HashMap&lt;&gt;();
-        map1.put(&quot;name&quot;,&quot;李四&quot;);
-        map.putAll(map1);
-        System.out.println(map);
+        SpringApplication application = new SpringApplication(CacheApplication.class);
+        application.setApplicationStartup(new BufferingApplicationStartup(2048));
+        application.run(args);
     &#125;
 &#125;
 </code></pre>
-</li>
-</ul>
-<h2 id="2-SpringBoot"><a href="#2-SpringBoot" class="headerlink" title="2.SpringBoot"></a>2.SpringBoot</h2><h5 id="1-Autowired与-Resource注入"><a href="#1-Autowired与-Resource注入" class="headerlink" title="1.@Autowired与@Resource注入"></a>1.@Autowired与@Resource注入</h5><ul>
-<li><p>@Resource的作用相当于@Autowired，只不过@Autowired按byType自动注入，而@Resource默认按 byName自动注入罢了。@Resource有两个属性是比较重要的，分是name和type，Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不指定name也不指定type属性，这时将通过反射机制使用byName自动注入策略。<br>@Resource装配顺序：</p>
-<ol>
-<li>如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常</li>
-<li>如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常</li>
-<li>如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常</li>
-<li>如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装　配；</li>
-</ol>
-</li>
-<li><p>Autowired默认按类型装配（这个注解是属业spring的），默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：@Autowired(required&#x3D;false) ，如果我们想使用名称装配可以结合@Qualifier注解进行使用。</p>
-<p><strong>总结，resource默认使用（name）名称，如果名称不存在，则返回上一级使用（type）类型，可以指定使用name或者type，如果找不到则会出异常。</strong></p>
-<p> <strong>Autowired使用Type ，找不到就出抛出异常</strong></p>
-</li>
-</ul>
-<h5 id="2-spring循环依赖"><a href="#2-spring循环依赖" class="headerlink" title="2. spring循环依赖"></a>2. spring循环依赖</h5><ol>
-<li><p>什么是循环依赖：</p>
-<p>有两个对象，分别是对象A与对象B创建对象A的时候需要对象B，创建对象B的时候需要对象A。</p>
-</li>
-<li><p>对象A的创建，创建A，将A放入3级缓存中，由于对象A的创建需要对象B；创建对象B,由于对象B的创建需要对象A，去3级缓存中拿到对象A，对象B完成创建，由于对象B创建成功，那么对象A也可以创建成功了。</p>
-</li>
-</ol>
-<h5 id="3-bean的生命周期"><a href="#3-bean的生命周期" class="headerlink" title="3.bean的生命周期"></a>3.bean的生命周期</h5><pre><code class="txt">1.实例化： 当程序需要JavaBean时，容器会调用默认的构造器实例化一个新对象。
-2.属性设置：在实例化后，容器使用setting方法将属性值注入到JavaBean中。
-3.初始化： 当所有属性均已设置后，容器将调用init方法初始化JavaBean。如有必要，JavaBean也可以在此时打开数据库链接或者初始化任何资源。
-4.活动: 在init方法完成之后，JavaBean进入活动状态，此时应用程序可以调用任何公共方法，读取或修改属性。
-5.销毁：当容器接收到信号通知其关闭时，会调用Java的destroy方法终止其运行，并释放它持有的所有资源。
-
-注：并非所有的容器都支持JavaBean的生命周期管理，具体而言，仅仅支持使用sping等框架的web容器可以对JavaBean进行全生命周期的管理。如果你需要完整的JavaBean生命周期管理功能，可以考虑基于spring的web容器，如tomcat、jetty等
+<h5 id="2-2在方法中添加注解-Async"><a href="#2-2在方法中添加注解-Async" class="headerlink" title="2.2在方法中添加注解 @Async"></a>2.2在方法中添加注解 @Async</h5><pre><code class="java">    @Async
+    public void poolTest() &#123;
+        try &#123;
+            Thread.sleep(1000);
+        &#125; catch (InterruptedException e) &#123;
+            throw new RuntimeException(e);
+        &#125;
+        log.info(&quot;异步执行&quot;);
+    &#125;
 </code></pre>
-<h2 id="3-中间件"><a href="#3-中间件" class="headerlink" title="3.中间件"></a>3.中间件</h2><h3 id="1-Rabbitmq"><a href="#1-Rabbitmq" class="headerlink" title="1.Rabbitmq"></a>1.Rabbitmq</h3><h5 id="1-rabitmq怎么保证消息不丢失？"><a href="#1-rabitmq怎么保证消息不丢失？" class="headerlink" title="1. rabitmq怎么保证消息不丢失？"></a>1. rabitmq怎么保证消息不丢失？</h5><p><strong>让每条消息都带一个唯一id</strong>，消费端获取到唯一id将它存储到数据库，每次消费是看数据库中是否有唯一id，有唯一id则不消费，无唯一id可以消费该条消息。</p>
-<h5 id="2-等待中"><a href="#2-等待中" class="headerlink" title="2.等待中"></a>2.等待中</h5>
+<h5 id="2-3方法调用"><a href="#2-3方法调用" class="headerlink" title="2.3方法调用"></a>2.3方法调用</h5><pre><code class="java">
+    @Resource
+    private TestServiceImpl  testService;
+    public void ThreadPoolTest() &#123;
+        testService.poolTest();
+        log.info(&quot;任务执行&quot;);
+    &#125;
+</code></pre>
+<h6 id="2-4执行结果"><a href="#2-4执行结果" class="headerlink" title="2.4执行结果"></a>2.4执行结果</h6><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405143900919.png" alt="image-20240405143900919"></p>
+
     </div>
     
     
