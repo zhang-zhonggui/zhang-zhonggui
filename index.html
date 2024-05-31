@@ -166,6 +166,152 @@
         
 
 <div class="post">
+    <a href="/zhang-zhonggui/2024/05/31/adguard%E8%AE%BE%E7%BD%AE%E4%B8%8A%E6%B8%B8dns/">
+        <h2 class="post-title">adguard设置上游dns</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/5/31
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="adguard设置上游dns"><a href="#adguard设置上游dns" class="headerlink" title="adguard设置上游dns"></a>adguard设置上游dns</h1>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/zhang-zhonggui/tags/dns/" style="color: #ffa2c4">
+                dns
+            </a>
+        </span>
+        
+    </div>
+    <a href="/zhang-zhonggui/2024/05/31/adguard%E8%AE%BE%E7%BD%AE%E4%B8%8A%E6%B8%B8dns/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/zhang-zhonggui/2024/04/16/docker%E6%95%B4%E5%90%88kafka%E6%8A%A5%E9%94%99/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="springboot整合kafka报错"><a href="#springboot整合kafka报错" class="headerlink" title="springboot整合kafka报错"></a>springboot整合kafka报错</h3><h4 id="1-错误内容"><a href="#1-错误内容" class="headerlink" title="1.错误内容"></a>1.错误内容</h4><pre><code class="java">java.net.UnknownHostException: 不知道这样的主机。 (kafka)
+    at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+    at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52) ~[na:na]
+    at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1211) ~[na:na]
+    at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1828) ~[na:na]
+    at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1139) ~[na:na]
+    at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818) ~[na:na]
+    at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688) ~[na:na]
+    at org.apache.kafka.clients.DefaultHostResolver.resolve(DefaultHostResolver.java:27) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.ClientUtils.resolve(ClientUtils.java:122) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.ClusterConnectionStates$NodeConnectionState.currentAddress(ClusterConnectionStates.java:510) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.ClusterConnectionStates$NodeConnectionState.access$200(ClusterConnectionStates.java:467) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.ClusterConnectionStates.currentAddress(ClusterConnectionStates.java:173) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.NetworkClient.initiateConnect(NetworkClient.java:1030) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.NetworkClient.ready(NetworkClient.java:301) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.tryConnect(ConsumerNetworkClient.java:590) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:907) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:883) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.RequestFuture$1.onSuccess(RequestFuture.java:206) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.RequestFuture.fireSuccess(RequestFuture.java:169) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.RequestFuture.complete(RequestFuture.java:129) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient$RequestFutureCompletionHandler.fireCompletion(ConsumerNetworkClient.java:617) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.firePendingCompletedRequests(ConsumerNetworkClient.java:427) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:312) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:230) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:265) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:240) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.coordinatorUnknownAndUnreadySync(ConsumerCoordinator.java:504) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.poll(ConsumerCoordinator.java:536) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.KafkaConsumer.updateAssignmentMetadataIfNeeded(KafkaConsumer.java:1220) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1179) ~[kafka-clients-3.6.1.jar:na]
+    at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1159) ~[kafka-clients-3.6.1.jar:na]
+    at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollConsumer(KafkaMessageListenerContainer.java:1659) ~[spring-kafka-3.1.2.jar:3.1.2]
+    at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doPoll(KafkaMessageListenerContainer.java:1634) ~[spring-kafka-3.1.2.jar:3.1.2]
+    at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1432) ~[spring-kafka-3.1.2.jar:3.1.2]
+    at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1323) ~[spring-kafka-3.1.2.jar:3.1.2]
+    at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run$$$capture(CompletableFuture.java:1804) ~[na:na]
+    at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java) ~[na:na]
+    at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+</code></pre>
+<h4 id="2-错误原因"><a href="#2-错误原因" class="headerlink" title="2.错误原因"></a>2.错误原因</h4><p>java.net.UnknownHostException: 不知道这样的主机。 (kafka) 在docker中找不到主机名称</p>
+<h4 id="3-解决方法"><a href="#3-解决方法" class="headerlink" title="3.解决方法"></a>3.解决方法</h4><p>修改host添加kafka的地址</p>
+<pre><code class="txt">92.168.2.38  kafka
+</code></pre>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/SuperrWatermelon/article/details/132048322#:~:text=%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F%EF%BC%9A,%E5%B0%86kafka%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%89%80%E5%9C%A8%E7%9A%84ip%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE%E5%88%B0C%3AWindowsSystem32driversetc%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84hosts%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E5%B9%B6%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1">https://blog.csdn.net/SuperrWatermelon/article/details/132048322#:~:text=%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F%EF%BC%9A,%E5%B0%86kafka%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%89%80%E5%9C%A8%E7%9A%84ip%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE%E5%88%B0C%3AWindowsSystem32driversetc%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84hosts%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E5%B9%B6%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1</a></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/zhang-zhonggui/2024/04/16/docker%E6%95%B4%E5%90%88kafka%E6%8A%A5%E9%94%99/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/zhang-zhonggui/2024/04/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h4 id="线程池核心线程数与最大线程数"><a href="#线程池核心线程数与最大线程数" class="headerlink" title="线程池核心线程数与最大线程数"></a>线程池核心线程数与最大线程数</h4><h5 id="线程池策略"><a href="#线程池策略" class="headerlink" title="线程池策略"></a>线程池策略</h5><p>corePoolSize：核心线程数；maximunPoolSize：最大线程数<br>每当有新的任务到线程池时，<br>第一步： 先判断线程池中当前线程数量是否达到了corePoolSize，若未达到，则新建线程运行此任务，且任务结束后将该线程保留在线程池中，不做销毁处理，若当前线程数量已达到corePoolSize，则进入下一步；<br>第二步： 判断工作队列(workQueue)是否已满，未满则将新的任务提交到工作队列中，满了则进入下一步；<br>第三步： 判断线程池中的线程数量是否达到了maxumunPoolSize，如果未达到，则新建一个工作线程来执行这个任务，如果达到了则使用饱和策略来处理这个任务。注意： 在线程池中的线程数量超过corePoolSize时，每当有线程的空闲时间超过了keepAliveTime，这个线程就会被终止。直到线程池中线程的数量不大于corePoolSize为止。<br>（由第三步可知，在一般情况下，Java线程池中会长期保持corePoolSize个线程。）</p>
+<h5 id="饱和策略"><a href="#饱和策略" class="headerlink" title="饱和策略"></a>饱和策略</h5><p>当工作队列满且线程个数达到maximunPoolSize后所采取的策略<br>AbortPolicy：默认策略；新任务提交时直接抛出未检查的异常RejectedExecutionException，该异常可由调用者捕获。<br>CallerRunsPolicy：既不抛弃任务也不抛出异常，使用调用者所在线程运行新的任务。<br>DiscardPolicy：丢弃新的任务，且不抛出异常。<br>DiscardOldestPolicy：调用poll方法丢弃工作队列队头的任务，然后尝试提交新任务</p>
+<p>引用:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33323054/article/details/106923732">https://blog.csdn.net/qq_33323054/article/details/106923732</a></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/zhang-zhonggui/2024/04/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/zhang-zhonggui/2024/04/05/springboot%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
         <h2 class="post-title">springboot线程池</h2>
     </a>
@@ -218,7 +364,7 @@ public class CacheApplication &#123;
     &#125;
 &#125;
 </code></pre>
-<h5 id="2-2在方法中添加注解-Async"><a href="#2-2在方法中添加注解-Async" class="headerlink" title="2.2在方法中添加注解 @Async"></a>2.2在方法中添加注解 @Async</h5><pre><code class="java">    @Async
+<h5 id="2-2在方法中添加注解-Async"><a href="#2-2在方法中添加注解-Async" class="headerlink" title="2.2在方法中添加注解@Async"></a>2.2在方法中添加注解@Async</h5><pre><code class="java">    @Async
     public void poolTest() &#123;
         try &#123;
             Thread.sleep(1000);
@@ -236,7 +382,7 @@ public class CacheApplication &#123;
         log.info(&quot;任务执行&quot;);
     &#125;
 </code></pre>
-<h6 id="2-4执行结果"><a href="#2-4执行结果" class="headerlink" title="2.4执行结果"></a>2.4执行结果</h6><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405143900919.png" alt="image-20240405143900919"></p>
+<h5 id="2-4执行结果"><a href="#2-4执行结果" class="headerlink" title="2.4执行结果"></a>2.4执行结果</h5><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240405144229229.png"></p>
 
             
         </div>
@@ -250,13 +396,46 @@ public class CacheApplication &#123;
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #03a9f4">
                 Spring Boot
             </a>
         </span>
         
     </div>
     <a href="/zhang-zhonggui/2024/04/05/springboot%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/zhang-zhonggui/2024/04/05/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="让bing对自己的网站进行收录"><a href="#让bing对自己的网站进行收录" class="headerlink" title="让bing对自己的网站进行收录"></a>让bing对自己的网站进行收录</h1><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201619443.png" alt="image-20240404201619443"></p>
+<h3 id="1-打开微软官方地址经行注册https-www-bing-com-webmasters-about"><a href="#1-打开微软官方地址经行注册https-www-bing-com-webmasters-about" class="headerlink" title="1.打开微软官方地址经行注册https://www.bing.com/webmasters/about"></a>1.打开微软官方地址经行注册<a target="_blank" rel="noopener" href="https://www.bing.com/webmasters/about">https://www.bing.com/webmasters/about</a></h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201830396.png" alt="image-20240404201830396"></p>
+<h3 id="2-网站添加"><a href="#2-网站添加" class="headerlink" title="2.网站添加"></a>2.网站添加</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404202257409.png" alt="image-20240404202257409"></p>
+<h3 id="3-网站添加后即完成"><a href="#3-网站添加后即完成" class="headerlink" title="3.网站添加后即完成"></a>3.网站添加后即完成</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404203317589.png" alt="image-20240404203317589"></p>
+<h3 id="4-最后等待时间被bing收录"><a href="#4-最后等待时间被bing收录" class="headerlink" title="4.最后等待时间被bing收录"></a>4.最后等待时间被bing收录</h3>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/zhang-zhonggui/2024/04/05/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -337,7 +516,7 @@ public class CacheApplication &#123;
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/hutool/" style="color: #00bcd4">
+            <a href="/zhang-zhonggui/tags/hutool/" style="color: #03a9f4">
                 hutool
             </a>
         </span>
@@ -377,14 +556,14 @@ public class CacheApplication &#123;
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/rabbitmq/" style="color: #ff7d73">
                 rabbitmq
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #00bcd4">
                 Spring Boot
             </a>
         </span>
@@ -471,191 +650,27 @@ public class CacheApplication &#123;
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ffa2c4">
+            <a href="/zhang-zhonggui/tags/Spring-Boot/" style="color: #ff7d73">
                 Spring Boot
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/redis/" style="color: #ff7d73">
+            <a href="/zhang-zhonggui/tags/redis/" style="color: #03a9f4">
                 redis
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #00a596">
+            <a href="/zhang-zhonggui/tags/mybatis/" style="color: #00bcd4">
                 mybatis
             </a>
         </span>
         
     </div>
     <a href="/zhang-zhonggui/2023/08/16/redis%E5%81%9Amybatis%E7%9A%84%E7%BC%93%E5%AD%98/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/07/11/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
-        <h2 class="post-title">自定义注解</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/7/11
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>自定义注解</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/spring-boot/" style="color: #00a596">
-                spring boot
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/07/11/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/05/29/%E5%B7%A5%E4%BD%9Cbug/">
-        <h2 class="post-title">工作bug</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/29
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="工作bug"><a href="#工作bug" class="headerlink" title="工作bug"></a>工作bug</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/work/" style="color: #03a9f4">
-                work
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/05/29/%E5%B7%A5%E4%BD%9Cbug/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/05/29/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/">
-        <h2 class="post-title">工作bug</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/29
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="让bing对自己的网站进行收录"><a href="#让bing对自己的网站进行收录" class="headerlink" title="让bing对自己的网站进行收录"></a>让bing对自己的网站进行收录</h1><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201619443.png" alt="image-20240404201619443"></p>
-<h3 id="1-打开微软官方地址经行注册https-www-bing-com-webmasters-about"><a href="#1-打开微软官方地址经行注册https-www-bing-com-webmasters-about" class="headerlink" title="1.打开微软官方地址经行注册https://www.bing.com/webmasters/about"></a>1.打开微软官方地址经行注册<a target="_blank" rel="noopener" href="https://www.bing.com/webmasters/about">https://www.bing.com/webmasters/about</a></h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201830396.png" alt="image-20240404201830396"></p>
-<h3 id="2-网站添加"><a href="#2-网站添加" class="headerlink" title="2.网站添加"></a>2.网站添加</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404202257409.png" alt="image-20240404202257409"></p>
-<h3 id="3-网站添加后即完成"><a href="#3-网站添加后即完成" class="headerlink" title="3.网站添加后即完成"></a>3.网站添加后即完成</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404203317589.png" alt="image-20240404203317589"></p>
-<h3 id="4-最后等待时间被bing收录"><a href="#4-最后等待时间被bing收录" class="headerlink" title="4.最后等待时间被bing收录"></a>4.最后等待时间被bing收录</h3>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">
-                博客
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/05/29/%E8%AE%A9bing%E7%BD%91%E7%AB%99%E6%94%B6%E5%BD%95/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/zhang-zhonggui/2023/05/09/mybatis%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5/">
-        <h2 class="post-title">mybatis批量插入</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/9
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="mybatis批量插入"><a href="#mybatis批量插入" class="headerlink" title="mybatis批量插入"></a>mybatis批量插入</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/zhang-zhonggui/tags/MySQL/" style="color: #03a9f4">
-                MySQL
-            </a>
-        </span>
-        
-    </div>
-    <a href="/zhang-zhonggui/2023/05/09/mybatis%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -669,6 +684,8 @@ public class CacheApplication &#123;
         
         <span>
             <a class="page-num" href="/zhang-zhonggui/page/2/">2</a>
+            
+            <a class="page-num" href="/zhang-zhonggui/page/3">3</a>
             
             
         </span>

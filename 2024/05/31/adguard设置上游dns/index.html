@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>工作bug | 张中贵的博客</title>
+        <title>adguard设置上游dns | 张中贵的博客</title>
         <meta name="author" content="zzg" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -145,14 +145,14 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>工作bug</h1>
+        <h1>adguard设置上游dns</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/5/29
+            2024/5/31
         </span>
         
         
@@ -163,7 +163,7 @@
             
             <span class="tag">
                 
-                <a href="/zhang-zhonggui/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+                <a href="/zhang-zhonggui/tags/dns/" style="color: #00a596">dns</a>
             </span>
             
         </span>
@@ -171,11 +171,30 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="让bing对自己的网站进行收录"><a href="#让bing对自己的网站进行收录" class="headerlink" title="让bing对自己的网站进行收录"></a>让bing对自己的网站进行收录</h1><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201619443.png" alt="image-20240404201619443"></p>
-<h3 id="1-打开微软官方地址经行注册https-www-bing-com-webmasters-about"><a href="#1-打开微软官方地址经行注册https-www-bing-com-webmasters-about" class="headerlink" title="1.打开微软官方地址经行注册https://www.bing.com/webmasters/about"></a>1.打开微软官方地址经行注册<a target="_blank" rel="noopener" href="https://www.bing.com/webmasters/about">https://www.bing.com/webmasters/about</a></h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404201830396.png" alt="image-20240404201830396"></p>
-<h3 id="2-网站添加"><a href="#2-网站添加" class="headerlink" title="2.网站添加"></a>2.网站添加</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404202257409.png" alt="image-20240404202257409"></p>
-<h3 id="3-网站添加后即完成"><a href="#3-网站添加后即完成" class="headerlink" title="3.网站添加后即完成"></a>3.网站添加后即完成</h3><p><img src="https://cdn.jsdelivr.net/gh/zhang-zhonggui/blog/image-20240404203317589.png" alt="image-20240404203317589"></p>
-<h3 id="4-最后等待时间被bing收录"><a href="#4-最后等待时间被bing收录" class="headerlink" title="4.最后等待时间被bing收录"></a>4.最后等待时间被bing收录</h3>
+        <h1 id="adguard设置上游dns"><a href="#adguard设置上游dns" class="headerlink" title="adguard设置上游dns"></a>adguard设置上游dns</h1><span id="more"></span>
+
+<p>最近在闲置的小Linux主机中安装adguard用来加速dns访问速度同时也是未来避免运营商对我经行dns污染以及抢答,使用总统下来,虽然多了一层,但网比之前好多了,这是我整理一份上游的dns地址包含国内外主流的dns,其他包含dot与doh,不使用ip的原因就是避免运营商抢答</p>
+<pre><code class="txt">tls://dot.pub
+tls://dns.google
+tls://doh.360.cn
+tls://dns.quad9.net
+tls://dns.alidns.com
+tls://118117.alidns.com
+tls://dns.quad9.net:853
+tls://cloudflare-dns.com
+https://doh.360.cn
+https://doh.pub/dns-query
+https://1.1.1.1/dns-query
+https://1.12.12.12/dns-query
+https://dns.google/dns-query
+https://sm2.doh.pub/dns-query
+https://dns.quad9.net/dns-query
+https://dns.alidns.com/dns-query
+https://dns.ipv6dns.com/dns-query
+https://118117.alidns.com/dns-query
+https://cloudflare-dns.com/dns-query
+</code></pre>
+
     </div>
     
     
